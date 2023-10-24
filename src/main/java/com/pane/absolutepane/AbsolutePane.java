@@ -3,6 +3,7 @@ package com.pane.absolutepane;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +30,48 @@ public class AbsolutePane extends Pane {
         super();
         setPrefSize(width, height);
         this.nodes = nodes;
+    }
+
+    public AbsolutePane(boolean synchronous) {
+        super();
+        if(!synchronous) {
+            this.nodes = new HashMap<>();
+        }
+        else{
+            this.nodes = Collections.synchronizedMap(new HashMap<>());
+        }
+    }
+
+    public AbsolutePane(Map<Node,Positon> nodes,boolean synchronous) {
+        super();
+        if(!synchronous) {
+            this.nodes = new HashMap<>(nodes);
+        }
+        else{
+            this.nodes = Collections.synchronizedMap(new HashMap<>(nodes));
+        }
+    }
+
+    public AbsolutePane(double width, double height,boolean synchronous){
+        super();
+        setPrefSize(width, height);
+        if(!synchronous) {
+            this.nodes = new HashMap<>();
+        }
+        else{
+            this.nodes = Collections.synchronizedMap(new HashMap<>());
+        }
+    }
+
+    public AbsolutePane(double width, double height, Map<Node,Positon> nodes, boolean synchronous){
+        super();
+        setPrefSize(width, height);
+        if(!synchronous) {
+            this.nodes = new HashMap<>(nodes);
+        }
+        else{
+            this.nodes = Collections.synchronizedMap(new HashMap<>(nodes));
+        }
     }
 
     @Override
